@@ -16,23 +16,25 @@ hotkeysManagerLoaded = false
 hotkeysWindow = nil
 hotkeysButton = nil
 currentHotkeyLabel = nil
-currentItemPreview = nil
+--currentItemPreview = nil
 itemWidget = nil
 addHotkeyButton = nil
 removeHotkeyButton = nil
 hotkeyText = nil
 hotKeyTextLabel = nil
 sendAutomatically = nil
+--[[
 selectObjectButton = nil
 clearObjectButton = nil
 useOnSelf = nil
 useOnTarget = nil
 useWith = nil
+--]]
 defaultComboKeys = nil
 perServer = true
 perCharacter = true
 mouseGrabberWidget = nil
-useRadioGroup = nil
+--useRadioGroup = nil
 currentHotkeys = nil
 boundCombosCallback = {}
 hotkeysList = {}
@@ -46,12 +48,13 @@ function init()
   hotkeysWindow:setVisible(false)
 
   currentHotkeys = hotkeysWindow:getChildById('currentHotkeys')
-  currentItemPreview = hotkeysWindow:getChildById('itemPreview')
+  --currentItemPreview = hotkeysWindow:getChildById('itemPreview')
   addHotkeyButton = hotkeysWindow:getChildById('addHotkeyButton')
   removeHotkeyButton = hotkeysWindow:getChildById('removeHotkeyButton')
   hotkeyText = hotkeysWindow:getChildById('hotkeyText')
   hotKeyTextLabel = hotkeysWindow:getChildById('hotKeyTextLabel')
   sendAutomatically = hotkeysWindow:getChildById('sendAutomatically')
+  --[[
   selectObjectButton = hotkeysWindow:getChildById('selectObjectButton')
   clearObjectButton = hotkeysWindow:getChildById('clearObjectButton')
   useOnSelf = hotkeysWindow:getChildById('useOnSelf')
@@ -63,6 +66,7 @@ function init()
   useRadioGroup:addWidget(useOnTarget)
   useRadioGroup:addWidget(useWith)
   useRadioGroup.onSelectionChange = function(self, selected) onChangeUseType(selected) end
+  --]]
 
   mouseGrabberWidget = g_ui.createWidget('UIWidget')
   mouseGrabberWidget:setVisible(false)
@@ -468,9 +472,11 @@ function updateHotkeyLabel(hotkeyLabel)
   end
 end
 
+
 function updateHotkeyForm(reset)
   if currentHotkeyLabel then
     removeHotkeyButton:enable()
+    --[[
     if currentHotkeyLabel.itemId ~= nil then
       hotkeyText:clearText()
       hotkeyText:disable()
@@ -505,6 +511,7 @@ function updateHotkeyForm(reset)
       useOnTarget:disable()
       useWith:disable()
       useRadioGroup:clearSelected()
+      --]]
       hotkeyText:enable()
       hotkeyText:focus()
       hotKeyTextLabel:enable()
@@ -514,23 +521,27 @@ function updateHotkeyForm(reset)
       hotkeyText:setText(currentHotkeyLabel.value)
       sendAutomatically:setChecked(currentHotkeyLabel.autoSend)
       sendAutomatically:setEnabled(currentHotkeyLabel.value and #currentHotkeyLabel.value > 0)
+      --[[
       selectObjectButton:enable()
       clearObjectButton:disable()
       currentItemPreview:clearItem()
     end
+    --]]
   else
     removeHotkeyButton:disable()
     hotkeyText:disable()
     sendAutomatically:disable()
+    --[[
     selectObjectButton:disable()
     clearObjectButton:disable()
     useOnSelf:disable()
     useOnTarget:disable()
     useWith:disable()
+    --]]
     hotkeyText:clearText()
-    useRadioGroup:clearSelected()
+    --useRadioGroup:clearSelected()
     sendAutomatically:setChecked(false)
-    currentItemPreview:clearItem()
+    --currentItemPreview:clearItem()
   end
 end
 
